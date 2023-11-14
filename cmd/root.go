@@ -13,7 +13,7 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "pigsay [flags] {text...}",
+	Use:   "pigsay [flags] text...",
 	Short: "Make a pig say things!",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) == 0 {
@@ -26,14 +26,27 @@ var rootCmd = &cobra.Command{
 	Version: "1.0.0",
 	Run: func(cmd *cobra.Command, args []string) {
 		eye, _ := cmd.Flags().GetString("eyes")
+		eye = eye[0:1] // take first character
 		wrapper := wordwrap.Wrapper(30, true)
 		wrapped := wrapper(strings.Join(args, " "))
 		wrappedWithIndent := wordwrap.Indent(wrapped, "  ", true)
-		// TODO: calculate longest row of wrappedWithIndent
-		// TODO: use repeat function to draw - characters (longest row + 4)
-		bubbleAndText := "------------------------------\n" + wrappedWithIndent + "\n------------------------------"
+		splitMessage := strings.Split(wrappedWithIndent, "\n")
+		longest := 0
+		finalMessage := ""
+		for _, v := range splitMessage {
+			l := len(v)
+			if l > longest {
+				longest = l
+			}
+			if finalMessage != "" {
+				finalMessage += "\n"
+			}
+			finalMessage += strings.Repeat(" ", 6) + v
+		}
+
+		bubbleAndText := strings.Repeat(" ", 6) + strings.Repeat("-", longest) + "\n" + finalMessage + "\n" + strings.Repeat(" ", 6) + strings.Repeat("-", longest)
 		cmd.Printf(bubbleAndText)
-		cmd.Printf("\n          \\|\n\n            _/|________\n           / " + eye[0:1] + "         \\\n          E,            |S\n           \\___________/\n            WW       WW")
+		cmd.Printf("\n          \\|\n\n            _/|________\n           / " + eye + "         \\\n          E,            |S\n           \\___________/\n            WW       WW")
 	},
 }
 
