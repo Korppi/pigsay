@@ -5,19 +5,35 @@ package cmd
 
 import (
 	"os"
+	"strings"
 
+	"github.com/eidolon/wordwrap"
 	"github.com/spf13/cobra"
 )
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "pigsay",
-	Short: "Make pig say things!",
-	Long:  ``,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
+	Use:   "pigsay [flags] {text...}",
+	Short: "Make a pig say things!",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			cmd.Help()
+			os.Exit(0)
+		}
+		return nil
+	},
+	Example: "pigsay Hello World :)\npigsay --eyes @ Now i have different eyes!",
+	Version: "1.0.0",
 	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Printf("\n  _/|________\n / o         \\\nE,            |S\n \\___________/\n  WW       WW")
+		eye, _ := cmd.Flags().GetString("eyes")
+		wrapper := wordwrap.Wrapper(30, true)
+		wrapped := wrapper(strings.Join(args, " "))
+		wrappedWithIndent := wordwrap.Indent(wrapped, "  ", true)
+		// TODO: calculate longest row of wrappedWithIndent
+		// TODO: use repeat function to draw - characters (longest row + 4)
+		bubbleAndText := "------------------------------\n" + wrappedWithIndent + "\n------------------------------"
+		cmd.Printf(bubbleAndText)
+		cmd.Printf("\n          \\|\n\n            _/|________\n           / " + eye[0:1] + "         \\\n          E,            |S\n           \\___________/\n            WW       WW")
 	},
 }
 
