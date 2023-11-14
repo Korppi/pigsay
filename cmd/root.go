@@ -44,7 +44,7 @@ var rootCmd = &cobra.Command{
 			finalMessage += strings.Repeat(" ", 6) + v
 		}
 
-		bubbleAndText := strings.Repeat(" ", 6) + strings.Repeat("-", longest) + "\n" + finalMessage + "\n" + strings.Repeat(" ", 6) + strings.Repeat("-", longest)
+		bubbleAndText := strings.Repeat(" ", 6) + strings.Repeat("-", longest+2) + "\n" + finalMessage + "\n" + strings.Repeat(" ", 6) + strings.Repeat("-", longest+2)
 		cmd.Printf(bubbleAndText)
 		cmd.Printf("\n          \\|\n\n            _/|________\n           / " + eye + "         \\\n          E,            |S\n           \\___________/\n            WW       WW")
 	},
