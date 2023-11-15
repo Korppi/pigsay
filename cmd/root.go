@@ -13,7 +13,7 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "pigsay [flags] text...",
+	Use:   "pigsay [flags] <MESSAGE>",
 	Short: "Make a pig say things!",
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) == 0 {
@@ -22,7 +22,7 @@ var rootCmd = &cobra.Command{
 		}
 		return nil
 	},
-	Example: "pigsay Hello World :)\npigsay --eyes @ Now i have different eyes!",
+	Example: "  pigsay\n\tDisplay help\n  pigsay Hello World :)\n\tDisplay pig saying 'Hello World :)'\n  pigsay --eyes @ Now i have different eyes!\n\tDisplay pig with custom eyes",
 	Version: "1.0.0",
 	Run: func(cmd *cobra.Command, args []string) {
 		eye, _ := cmd.Flags().GetString("eyes")
