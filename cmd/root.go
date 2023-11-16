@@ -11,6 +11,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var eyes string
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "pigsay [flags] <MESSAGE>",
@@ -25,8 +27,7 @@ var rootCmd = &cobra.Command{
 	Example: "  pigsay\n\tDisplay help\n  pigsay Hello World :)\n\tDisplay pig saying 'Hello World :)'\n  pigsay --eyes @ Now i have different eyes!\n\tDisplay pig with custom eyes",
 	Version: "1.0.0",
 	Run: func(cmd *cobra.Command, args []string) {
-		eye, _ := cmd.Flags().GetString("eyes")
-		eye = eye[0:1] // take first character
+		eye := eyes[0:1]
 		wrapper := wordwrap.Wrapper(30, true)
 		wrapped := wrapper(strings.Join(args, " "))
 		wrappedWithIndent := wordwrap.Indent(wrapped, "  ", true)
@@ -65,7 +66,7 @@ func init() {
 	// will be global for your application.
 
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.pigsay.yaml)")
-	rootCmd.PersistentFlags().StringP("eyes", "e", "o", "give pig different eyes")
+	rootCmd.PersistentFlags().StringVarP(&eyes, "eyes", "e", "o", "give pig different eyes")
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	//rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
