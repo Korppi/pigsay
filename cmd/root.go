@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/Korppi/pigsay/version"
 	"github.com/eidolon/wordwrap"
 	"github.com/spf13/cobra"
 )
@@ -79,7 +80,7 @@ var rootCmd = &cobra.Command{
 		return nil
 	},
 	Example: example,
-	Version: "1.0.0",
+	Version: version.Version,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if len([]rune(eyes)) != 1 {
 			return errors.New("eyes should be only 1 character, no less no more")
