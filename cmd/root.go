@@ -86,23 +86,6 @@ var rootCmd = &cobra.Command{
 			return errors.New("eyes should be only 1 character, no less no more")
 		}
 		bubble := buildSpeechBubble(strings.Join(args, " "))
-		/*
-			splitMessage := strings.Split(wrappedWithIndent, "\n")
-			longest := 0
-			finalMessage := ""
-			for _, v := range splitMessage {
-				l := len(v)
-				if l > longest {
-					longest = l
-				}
-				if finalMessage != "" {
-					finalMessage += "\n"
-				}
-				finalMessage += strings.Repeat(" ", 6) + v
-			}*/
-		wrapper := wordwrap.Wrapper(30, true)
-		wrapped := wrapper(strings.Join(args, " "))
-		cmd.Println(wrapped)
 		cmd.Printf(bubble)
 		cmd.Printf(pig, eyes)
 		return nil
