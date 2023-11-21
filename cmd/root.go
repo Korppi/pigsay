@@ -43,28 +43,26 @@ func buildSpeechBubble(text string) string {
 			longest = l
 		}
 	}
-	bubbleLeftPadding := 2
-	var bubbleSize int
-	if bubbleSize = 3; longest > bubbleSize {
-		bubbleSize = longest
-	}
+	bubblePaddingLeft := 2
+	textPaddingLeft := 1
+	bubbleWidth := longest + 2
+	bubbleHeaderUpperPadding := bubblePaddingLeft + 1
+	bubbleFooterLinesBeforeArrow := 1
+	bubbleFooterArrowWidth := 2
+	bubbleFooterLinesAfterArrow := bubbleWidth - 3
+
 	//header
-	bubble := strings.Repeat(" ", bubbleLeftPadding+1) + strings.Repeat("_", bubbleSize+1) + "\n"
-	bubble += strings.Repeat(" ", bubbleLeftPadding) + "/" + strings.Repeat(" ", bubbleSize+1) + "\\\n"
+	bubble := strings.Repeat(" ", bubbleHeaderUpperPadding) + strings.Repeat("_", bubbleWidth) + "\n"
+	bubble += strings.Repeat(" ", bubblePaddingLeft) + "/" + strings.Repeat(" ", bubbleWidth) + "\\\n"
 	//body
-	size := len(splitMessage)
 	for _, v := range splitMessage {
-		l := len([]rune(v))
-		if size == 1 && (l == 1 || l == 2) {
-			bubble += strings.Repeat(" ", bubbleLeftPadding-1) + "|" + strings.Repeat(" ", 2) + v + strings.Repeat(" ", 2) + "|"
-		} else {
-			bubble += strings.Repeat(" ", bubbleLeftPadding-1) + "|" + "  " + v + strings.Repeat(" ", longest-l+1) + "|"
-		}
-		bubble += "\n"
+		textPaddingRight := longest - len([]rune(v)) + 1
+		bubble += strings.Repeat(" ", bubblePaddingLeft) + "|" + strings.Repeat(" ", textPaddingLeft) + v + strings.Repeat(" ", textPaddingRight) + "|\n"
 	}
 	//footer
-	bubble += strings.Repeat(" ", bubbleLeftPadding) + "\\" + strings.Repeat("_", 1) + strings.Repeat(" ", 2) + strings.Repeat("_", bubbleSize-2) + "/\n"
-	bubble += strings.Repeat(" ", bubbleLeftPadding+2) + "\\|"
+	bubble += strings.Repeat(" ", bubblePaddingLeft) + "\\" + strings.Repeat("_", bubbleFooterLinesBeforeArrow) +
+		strings.Repeat(" ", bubbleFooterArrowWidth) + strings.Repeat("_", bubbleFooterLinesAfterArrow) + "/\n"
+	bubble += strings.Repeat(" ", bubblePaddingLeft+2) + "\\|"
 
 	return bubble
 }
