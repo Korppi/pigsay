@@ -1,5 +1,5 @@
 # pigsay
-Cowsay clone but with pig. I made this to learn more about go and cobra.
+Inspired by cowsay. I made this to learn more about go and cobra.
 
 # How to use
 In builds/ folder you can find binaries for pigsay. For windows use pigsay.exe and for linux use pigsay. Download them, open terminal in folder you downloaded them and execute command 
