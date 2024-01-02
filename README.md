@@ -57,4 +57,4 @@ Flags:
 # Example video
 Example video with different eyes and longer text
 
-[![asciicast](https://asciinema.org/a/1NSnL30u9Pccdggx1Ga2yHRna.svg)](https://asciinema.org/a/1NSnL30u9Pccdggx1Ga2yHRna)
+[![asciicast](https://asciinema.org/a/PoIgoc2GUqiAtg7tN8zfzwWFg.svg)](https://asciinema.org/a/PoIgoc2GUqiAtg7tN8zfzwWFg)
