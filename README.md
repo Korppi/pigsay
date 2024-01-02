@@ -55,6 +55,5 @@ Flags:
 ```
 
 # Example video
-Example video with different eyes and longer text
 
 [![asciicast](https://asciinema.org/a/PoIgoc2GUqiAtg7tN8zfzwWFg.svg)](https://asciinema.org/a/PoIgoc2GUqiAtg7tN8zfzwWFg)
