@@ -1,3 +1,4 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/Korppi/pigsay)](https://goreportcard.com/report/github.com/Korppi/pigsay)
 # pigsay
 Inspired by cowsay. I made this to learn more about go and cobra.
 
